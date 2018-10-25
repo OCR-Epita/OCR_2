@@ -6,7 +6,7 @@
 #include "Packages/Thomas/TraitementImage.h"
 
 int main(){
-    FILE *file = fopen("../Images/Amaury.bmp","a+");
+    FILE *file = fopen("../Images/lol.bmp","a+");
     main_(file);
     return 0;
 }
