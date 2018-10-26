@@ -55,7 +55,6 @@ BMPPic_ Init(FILE *file, BMPPic_ myPic){
 
 //Get the greyscale image out of the original one
 BMPPic_ InitGreyMatr(BMPPic_ myPic){
-    myPic = loadGreyMatric(myPic);
     myPic.GREYMATRIX = malloc(myPic.height*myPic.width*sizeof(char));
     for (size_t i = 0; i < myPic.height; ++i) {
         myPic.GREYMATRIX[i]=malloc(myPic.width* sizeof(char));
@@ -65,7 +64,6 @@ BMPPic_ InitGreyMatr(BMPPic_ myPic){
             myPic.GREYMATRIX[i][j]=a;
         }
     }
-    saveGreyMatrix(myPic);
     return myPic;
 }
 
@@ -104,7 +102,6 @@ BMPPic_ setGray(BMPPic_ myPic,size_t x, size_t y,unsigned char val){
 
 //Recontrsuct the image, helpfull to check the accuracy of our fonctions
 void restructPic(BMPPic_ myPic, char name[]){
-    myPic = loadGreyMatric(myPic);
     for (size_t i = 0; i < myPic.height; ++i) {
         for (size_t j = 0; j < myPic.width; ++j) {
             Pixel_ cur;
@@ -119,12 +116,10 @@ void restructPic(BMPPic_ myPic, char name[]){
     fwrite(myPic.HEADERDATA,(size_t) myPic.header.bfOffBits,1,ok);
     fwrite(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,ok);
     fclose(ok);
-    saveGreyMatrix(myPic);
 }
 
 //Get the edges of shapes used to binarize an image with text
 BMPPic_ applyFilter(BMPPic_ myPic){
-    myPic = loadGreyMatric(myPic);
     long **DATA = calloc(myPic.height*myPic.width, sizeof(long));
     long max = 0;
     long min = 999999;
@@ -149,13 +144,11 @@ BMPPic_ applyFilter(BMPPic_ myPic){
         free(DATA[k]);
     }
     free(DATA);
-    saveGreyMatrix(myPic);
     return myPic;
 }
 
 //Detect text on an image
 BMPPic_ ApplyRLSA(BMPPic_ myPic){
-    myPic = loadGreyMatric(myPic);
     double seuil = 200;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
@@ -212,7 +205,6 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
             myPic = setGray(myPic, (size_t) l, (size_t) i, (unsigned char) res);
         }
     }
-    saveGreyMatrix(myPic);
     return myPic;
 }
 
