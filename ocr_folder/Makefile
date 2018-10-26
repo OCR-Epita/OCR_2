@@ -1,8 +1,8 @@
 CC=gcc
-CFLAGS= -Wall -Wextra
+CFLAGS= -g -Wall -Wextra
 LDFLAGS= -lm
 EXEC=ocr
-SRC= Packages/Thomas/TraitementImage.c Packages/lucas/Binary.c main.c
+SRC= Packages/Thomas/Process.c Packages/lucas/Binary.c main.c 
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)
@@ -21,6 +21,7 @@ clean:
 	rm -fr *.bmp
 	rm -rf *.o 
 	rm -fr Packages/Thomas/*.o
+	rm -fr Packages/Thomas/SaverLoader/*.o
 	rm -fr Packages/lucas/*.o
 
 mrproper: clean
