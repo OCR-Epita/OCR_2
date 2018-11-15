@@ -1,10 +1,7 @@
-
+#include <stdio.h>
+#include "../Thomas/TraitementImage.h"
 #ifndef PROJECT2_BINARY_H
 #define PROJECT2_BINARY_H
-#include <string.h>
-#include <math.h>
-#include <stdio.h>
-#include "../Thomas/Process.h"
 
 typedef struct {
 

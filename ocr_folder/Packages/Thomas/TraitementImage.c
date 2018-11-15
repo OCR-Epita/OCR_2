@@ -8,8 +8,9 @@
 #include <string.h>
 
 #include "../lucas/Binary.h"
+#include "../lucas/Segmentation.h"
 
-#include "Process.h"
+#include "TraitementImage.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
 BMPPic_ getHeader(char data[]){
@@ -64,6 +65,7 @@ BMPPic_ InitGreyMatr(BMPPic_ myPic){
             myPic.GREYMATRIX[i][j]=a;
         }
     }
+
     return myPic;
 }
 
@@ -89,7 +91,7 @@ BMPPic_ setPixel(BMPPic_ myPic,size_t i,size_t j,Pixel_ pixel){
 //Same thing for GetPixel but for greyscale image
 unsigned char getGray(BMPPic_ myPic,size_t x, size_t y){
     unsigned char res = 0;
-    if(x < myPic.height && y < myPic.width)
+    if(x >= 0 && x < myPic.height && y >= 0 && y < myPic.width)
         res = myPic.GREYMATRIX[x][y];
     return res;
 }
@@ -149,7 +151,8 @@ BMPPic_ applyFilter(BMPPic_ myPic){
 
 //Detect text on an image
 BMPPic_ ApplyRLSA(BMPPic_ myPic){
-    double seuil = 200;
+
+    double seuil = 180;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
 
@@ -164,6 +167,7 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
                 data_x[i][j] = 0;
                 if(compt <= seuil){
                     for (int k = compt; k > 0; --k) {
+                        //RLSAPICx = setGray(RLSAPICx,i,j-k,255);
                         data_x[i][j-k] = 0;
                     }
                 }
@@ -172,7 +176,7 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
         }
     }
 
-    seuil = 200;
+    seuil = 500;
 
 
 
@@ -194,8 +198,8 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
         }
     }
 
-    for (size_t l = 0; l < myPic.height; ++l) {
-        for (size_t i = 0; i < myPic.width; ++i) {
+    for (int l = 0; l < myPic.height; ++l) {
+        for (int i = 0; i < myPic.width; ++i) {
             int a = data_x[l][i];
             int b = data_y[l][i];
             int res = 255;
@@ -205,63 +209,26 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
             myPic = setGray(myPic, (size_t) l, (size_t) i, (unsigned char) res);
         }
     }
+
     return myPic;
 }
 
 
-//Free bytes allocs
-void freePic(BMPPic_ myPic){
 
-    
-    free(myPic.PIXELDATA);
-    free(myPic.HEADERDATA);
-}
-
-void saveGreyMatrix(BMPPic_ myPic){
-    char DATA[myPic.height*myPic.width];
-    for (size_t i = 0; i < myPic.height; ++i)
-    {
-        for (size_t j = 0; j < myPic.width; ++j)
-        {
-            DATA[i*myPic.width + j] = getGray(myPic,i,j);
-        }
-        free(myPic.GREYMATRIX[i]);
-    }
-    free(myPic.GREYMATRIX);
-    FILE* file = fopen("DATA","w+");
-    fwrite(DATA,1,myPic.height*myPic.width,file);
-    fclose(file);
-}
-
-BMPPic_ loadGreyMatric(BMPPic_ myPic){
-    FILE* file = fopen("DATA","r");
-    if (file == NULL)    
-        err(1,"Fichier vide");
-    char DATA[myPic.height*myPic.width];
-    fread(DATA,myPic.height*myPic.width,1,file);
-    myPic.GREYMATRIX = malloc(myPic.height*myPic.width*sizeof(char));
-    for (size_t i = 0; i < myPic.height; ++i)
-    {
-        myPic.GREYMATRIX[i] = malloc(myPic.width*sizeof(char));
-        for (size_t j = 0; j < myPic.width; ++j)
-        {
-            myPic.GREYMATRIX[i][j] = *((short *) (DATA + i*myPic.width + j));
-        }
-    }    
-
-    fclose(file);
-    return myPic;
-}
 
 int main_(FILE *file){
+    BMPPic_ myPic;
     BMPPic_ RLSAPic;
+    //myPic = Init(file,myPic);
     RLSAPic = Init(file,RLSAPic);
-    //RLSAPic = end(RLSAPic);
-    
+    RLSAPic = end(RLSAPic);
+    restructPic(RLSAPic,"../Lucas.bmp");
     RLSAPic = applyFilter(RLSAPic);
+    RLSAPic = ApplyRLSA(RLSAPic);
+    RLSAPic = Get_Space_Paragraph(RLSAPic);
+    RLSAPic = Get_horizontal_Paragraph(RLSAPic);
 
-    restructPic(RLSAPic,"Images/res.bmp");
+    restructPic(RLSAPic,"../RLSAPic.bmp");
+
     fclose(file);
-    freePic(RLSAPic);
-    return 0;
 }

@@ -1,9 +1,12 @@
-#ifndef PROJECT2_PROCESS_H
-#define PROJECT2_PROCESS_H
+//
+// Created by root on 18/10/18.
+//
+
+#ifndef PROJECT2_TRAITEMENTIMAGE_H
+#define PROJECT2_TRAITEMENTIMAGE_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <err.h>
 #include <math.h>
 #include <string.h>
@@ -45,6 +48,11 @@ typedef struct {
     unsigned char *HEADERDATA;
     unsigned char *PIXELDATA;
     unsigned char **GREYMATRIX;
+    unsigned char **RLSAx;
+    unsigned char **RLSAy;
+
+    size_t* colons_scope;
+    int last;
 } BMPPic_;
 
 int main_(FILE *file);
@@ -54,9 +62,8 @@ BMPPic_ getHeader(char data[]);
 BMPPic_ Init(FILE *file, BMPPic_ myPic);
 BMPPic_ InitGreyMatr(BMPPic_ myPic);
 BMPPic_ setGray(BMPPic_ myPic,size_t x, size_t y,unsigned char val);
+unsigned char getGray(BMPPic_ myPic,size_t x, size_t y);
 void restructPic(BMPPic_ myPic, char name[]);
 BMPPic_ ApplyRLSA(BMPPic_ myPic);
-void freePic(BMPPic_ myPic);
-void saveGreyMatrix(BMPPic_ myPic);
-BMPPic_ loadGreyMatric(BMPPic_ myPic);
-#endif
+
+#endif //PROJECT2_TRAITEMENTIMAGE_H
