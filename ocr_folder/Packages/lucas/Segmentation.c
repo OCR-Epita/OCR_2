@@ -26,7 +26,7 @@ BMPPic_ Get_Space_Paragraph (BMPPic_ MyPic)
     size_t j;
     float res;
     size_t collons[MyPic.width];
-    for (int l = 0; l < MyPic.width; ++l) {
+    for (size_t l = 0; l < MyPic.width; ++l) {
         collons[l] = 0;
     }
     int k =0;
@@ -85,7 +85,7 @@ BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic)
     size_t j;
     float res;
     size_t collons[MyPic.height];
-    for (int l = 0; l < MyPic.height; ++l) {
+    for (size_t l = 0; l < MyPic.height; ++l) {
         collons[l] = 0;
     }
     int k =0;

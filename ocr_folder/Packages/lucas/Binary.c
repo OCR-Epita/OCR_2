@@ -240,8 +240,8 @@ BMPPic_ Changing (BMPPic_ pic,int threshold,size_t x,size_t y)
 //aplly the binarisation
 BMPPic_ end (BMPPic_ pic)
 {
-    int i = 0;
-    int j = 0;
+    size_t i = 0;
+    size_t j = 0;
     histogram histo = Get_histo(pic);
     histo = Get_window(histo);
     histo = Calculus(histo);

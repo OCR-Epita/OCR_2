@@ -91,7 +91,7 @@ BMPPic_ setPixel(BMPPic_ myPic,size_t i,size_t j,Pixel_ pixel){
 //Same thing for GetPixel but for greyscale image
 unsigned char getGray(BMPPic_ myPic,size_t x, size_t y){
     unsigned char res = 0;
-    if(x >= 0 && x < myPic.height && y >= 0 && y < myPic.width)
+    if(x < myPic.height && y < myPic.width)
         res = myPic.GREYMATRIX[x][y];
     return res;
 }
@@ -198,8 +198,8 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
         }
     }
 
-    for (int l = 0; l < myPic.height; ++l) {
-        for (int i = 0; i < myPic.width; ++i) {
+    for (size_t l = 0; l < myPic.height; ++l) {
+        for (size_t i = 0; i < myPic.width; ++i) {
             int a = data_x[l][i];
             int b = data_y[l][i];
             int res = 255;
@@ -217,10 +217,10 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
 
 
 int main_(FILE *file){
-    BMPPic_ myPic;
     BMPPic_ RLSAPic;
     //myPic = Init(file,myPic);
     RLSAPic = Init(file,RLSAPic);
+
     RLSAPic = end(RLSAPic);
     restructPic(RLSAPic,"../Lucas.bmp");
     RLSAPic = applyFilter(RLSAPic);
@@ -231,4 +231,5 @@ int main_(FILE *file){
     restructPic(RLSAPic,"../RLSAPic.bmp");
 
     fclose(file);
+    return 0;
 }
