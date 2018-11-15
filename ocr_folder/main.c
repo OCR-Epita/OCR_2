@@ -6,7 +6,7 @@
 
 int main()
 {
-	FILE *file = fopen("Images/QCM.bmp","a+");
+	FILE *file = fopen("Images/lol.bmp","a+");
     main_(file);
 	return 0;
 }

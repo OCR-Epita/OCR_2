@@ -6,12 +6,13 @@
 
 
 void save_(BMPPic_ myPic){
-	unsigned char DATA[myPic.height][myPic.width];
+	unsigned char data[myPic.height*myPic.width];
+	printf("%d\n", myPic.height);
 	for (size_t i = 0; i < myPic.height; ++i)
 	{
 		for (size_t j = 0; j < myPic.width; ++j)
 		{
-			DATA[i][j] = myPic.GREYMATRIX[i][j];
+			data[(i*myPic.width) + j] = myPic.GREYMATRIX[i][j];
 		}
 	}
 	printf("ok \n");

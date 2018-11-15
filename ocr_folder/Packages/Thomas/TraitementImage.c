@@ -10,6 +10,7 @@
 #include "../lucas/Binary.h"
 #include "../lucas/Segmentation.h"
 
+#include "Saver.h"
 #include "TraitementImage.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
@@ -20,8 +21,6 @@ BMPPic_ getHeader(char data[]){
     myPic.header.bfReserved1 = *((short *) (data + 6));
     myPic.header.bfReserved2 = *((short *) (data + 8));
     myPic.header.bfOffBits = *((data + 10));
-    myPic.header.biSize = *((int *) (data + 14));
-    myPic.header.biSize = *((int *) (data + 14));
     myPic.header.biSize = *((int *) (data + 14));
     myPic.header.biWidth = *((int *) (data + 18));
     myPic.header.biHeight = *((int *) (data + 22));
@@ -221,14 +220,15 @@ int main_(FILE *file){
     //myPic = Init(file,myPic);
     RLSAPic = Init(file,RLSAPic);
 
+
     RLSAPic = end(RLSAPic);
-    restructPic(RLSAPic,"../Lucas.bmp");
-    RLSAPic = applyFilter(RLSAPic);
-    RLSAPic = ApplyRLSA(RLSAPic);
+    restructPic(RLSAPic,"result/Lucas.bmp");
+    //RLSAPic = applyFilter(RLSAPic);
+    //RLSAPic = ApplyRLSA(RLSAPic);
     RLSAPic = Get_Space_Paragraph(RLSAPic);
     RLSAPic = Get_horizontal_Paragraph(RLSAPic);
 
-    restructPic(RLSAPic,"../RLSAPic.bmp");
+    restructPic(RLSAPic,"result/RLSAPic.bmp");
 
     fclose(file);
     return 0;
