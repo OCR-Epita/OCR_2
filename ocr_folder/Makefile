@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS= -g -Wall -Wextra
 LDFLAGS= -lm
 EXEC=ocr
-SRC= Packages/Thomas/Process.c Packages/lucas/Binary.c main.c 
+SRC= Packages/Thomas/TraitementImage.c Packages/lucas/Binary.c Packages/lucas/Segmentation.c Packages/Thomas/Saver.c main.c 
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)

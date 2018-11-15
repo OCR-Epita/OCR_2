@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <err.h>
 #include "Packages/lucas/Binary.h"
-#include "Packages/Thomas/Process.h"
+#include "Packages/Thomas/TraitementImage.h"
 
 int main()
 {
