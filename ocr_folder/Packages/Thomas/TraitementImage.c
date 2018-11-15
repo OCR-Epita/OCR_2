@@ -217,18 +217,27 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
 
 int main_(FILE *file){
     BMPPic_ RLSAPic;
-    //myPic = Init(file,myPic);
+    
     RLSAPic = Init(file,RLSAPic);
 
-
     RLSAPic = end(RLSAPic);
-    restructPic(RLSAPic,"result/Lucas.bmp");
-    //RLSAPic = applyFilter(RLSAPic);
-    //RLSAPic = ApplyRLSA(RLSAPic);
+
+
+
+    restructPic(RLSAPic,"result/1.bmp");
+
+    save_(RLSAPic);
+
+    
+    RLSAPic = applyFilter(RLSAPic);
+
+    RLSAPic = ApplyRLSA(RLSAPic);
+
     RLSAPic = Get_Space_Paragraph(RLSAPic);
+
     RLSAPic = Get_horizontal_Paragraph(RLSAPic);
 
-    restructPic(RLSAPic,"result/RLSAPic.bmp");
+    restructPic(RLSAPic,"result/result.bmp");
 
     fclose(file);
     return 0;
