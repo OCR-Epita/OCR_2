@@ -222,23 +222,24 @@ int main_(FILE *file){
 
     RLSAPic = end(RLSAPic);
 
-
-
     restructPic(RLSAPic,"result/1.bmp");
 
     save_(RLSAPic);
 
-    
-    RLSAPic = applyFilter(RLSAPic);
-
-    RLSAPic = ApplyRLSA(RLSAPic);
-
-    RLSAPic = Get_Space_Paragraph(RLSAPic);
-
-    RLSAPic = Get_horizontal_Paragraph(RLSAPic);
-
-    restructPic(RLSAPic,"result/result.bmp");
-
+   
     fclose(file);
+
+
+    // RLSAPic = applyFilter(RLSAPic);
+
+    // RLSAPic = ApplyRLSA(RLSAPic);
+
+    // RLSAPic = Get_Space_Paragraph(RLSAPic);
+
+    // RLSAPic = Get_horizontal_Paragraph(RLSAPic);
+
+    // restructPic(RLSAPic,"result/result.bmp");
+
+
     return 0;
 }

@@ -13,13 +13,23 @@ void save_(BMPPic_ myPic){
 		{
 			data[(i*myPic.width) + j] = myPic.GREYMATRIX[i][j];
 		}
-		//free(myPic.GREYMATRIX[i]);
 	}
 	FILE* file = fopen("GREYMATRIX","w+");
 	fwrite(data,myPic.height*myPic.width,sizeof(unsigned char),file);
 	fclose(file);
+	I_make_you_your_freedom(myPic);
 }
 
 BMPPic_ load_(BMPPic_ myPic){
+	myPic.GREYMATRIX = malloc(myPic.height*myPic.width*sizeof(unsigned char));
+
 	return myPic;
+}
+
+void I_make_you_your_freedom(BMPPic_ myPic){
+	for (size_t i = 0; i < myPic.height; ++i)
+	{
+		free(myPic.GREYMATRIX[i]);
+	}
+	free(myPic.GREYMATRIX);
 }
