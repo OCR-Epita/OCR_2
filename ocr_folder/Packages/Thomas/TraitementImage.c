@@ -6,10 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "../lucas/Binary.h"
 #include "../lucas/Segmentation.h"
-
 #include "TraitementImage.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
@@ -231,4 +228,5 @@ int main_(FILE *file){
     restructPic(RLSAPic,"../RLSAPic.bmp");
 
     fclose(file);
+    return 0;
 }
