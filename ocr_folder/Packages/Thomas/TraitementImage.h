@@ -39,8 +39,6 @@ typedef struct {
     int yes;
 } Pixel_;
 
-
-
 typedef struct {
     BITMAPHEADER header;
     size_t height;
@@ -48,14 +46,14 @@ typedef struct {
     unsigned char *HEADERDATA;
     unsigned char *PIXELDATA;
     unsigned char **GREYMATRIX;
-    unsigned char **RLSAx;
-    unsigned char **RLSAy;
+    
+    unsigned char **TEXTZONE;
 
     size_t* colons_scope;
     int last;
 } BMPPic_;
 
-int main_(FILE *file);
+BMPPic_ treatPic(FILE *file);
 BMPPic_ setPixel(BMPPic_ myPic,size_t i,size_t j,Pixel_ pixel);
 Pixel_ getPixel(BMPPic_ myPic,size_t i,size_t j);
 BMPPic_ getHeader(char data[]);
@@ -64,6 +62,6 @@ BMPPic_ InitGreyMatr(BMPPic_ myPic);
 BMPPic_ setGray(BMPPic_ myPic,size_t x, size_t y,unsigned char val);
 unsigned char getGray(BMPPic_ myPic,size_t x, size_t y);
 void restructPic(BMPPic_ myPic, char name[]);
-BMPPic_ ApplyRLSA(BMPPic_ myPic);
+BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b);
 
 #endif //PROJECT2_TRAITEMENTIMAGE_H

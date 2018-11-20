@@ -1,17 +1,11 @@
-//
-// Created by root on 18/10/18.
-//
-
-#include "../lucas/Binary.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 #include "../lucas/Binary.h"
 #include "../lucas/Segmentation.h"
-
-#include "Saver.h"
 #include "TraitementImage.h"
+#include "ImageParser.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
 BMPPic_ getHeader(char data[]){
@@ -50,6 +44,7 @@ BMPPic_ Init(FILE *file, BMPPic_ myPic){
     myPic.PIXELDATA = calloc((size_t) myPic.header.bfSize - myPic.header.bfOffBits, sizeof(char));
     fread(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,file);
     myPic = InitGreyMatr(myPic);
+    
     return myPic;
 }
 
@@ -64,7 +59,6 @@ BMPPic_ InitGreyMatr(BMPPic_ myPic){
             myPic.GREYMATRIX[i][j]=a;
         }
     }
-
     return myPic;
 }
 
@@ -103,6 +97,7 @@ BMPPic_ setGray(BMPPic_ myPic,size_t x, size_t y,unsigned char val){
 
 //Recontrsuct the image, helpfull to check the accuracy of our fonctions
 void restructPic(BMPPic_ myPic, char name[]){
+    
     for (size_t i = 0; i < myPic.height; ++i) {
         for (size_t j = 0; j < myPic.width; ++j) {
             Pixel_ cur;
@@ -117,10 +112,12 @@ void restructPic(BMPPic_ myPic, char name[]){
     fwrite(myPic.HEADERDATA,(size_t) myPic.header.bfOffBits,1,ok);
     fwrite(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,ok);
     fclose(ok);
+    
 }
 
 //Get the edges of shapes used to binarize an image with text
 BMPPic_ applyFilter(BMPPic_ myPic){
+    
     long **DATA = calloc(myPic.height*myPic.width, sizeof(long));
     long max = 0;
     long min = 999999;
@@ -145,13 +142,14 @@ BMPPic_ applyFilter(BMPPic_ myPic){
         free(DATA[k]);
     }
     free(DATA);
+    
     return myPic;
 }
 
 //Detect text on an image
-BMPPic_ ApplyRLSA(BMPPic_ myPic){
-
-    double seuil = 180;
+BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
+    
+    double seuil = seuil_a;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
 
@@ -175,7 +173,7 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
         }
     }
 
-    seuil = 500;
+    seuil = seuil_b;
 
 
 
@@ -207,39 +205,30 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
 
             myPic = setGray(myPic, (size_t) l, (size_t) i, (unsigned char) res);
         }
-    }
-
+    }    
     return myPic;
+} 
+
+void FreePic(BMPPic_ myPic){
+    free(myPic.HEADERDATA);
+    free(myPic.PIXELDATA);
+    for (size_t i = 0; i < myPic.height; ++i)
+    {
+        free(myPic.GREYMATRIX[i]);
+    }
+    free(myPic.GREYMATRIX);
 }
 
+BMPPic_ treatPic(FILE *file){
+    BMPPic_ myPic;
+    myPic = Init(file,myPic);
+    //myPic = end(myPic);
 
-
-
-int main_(FILE *file){
-    BMPPic_ RLSAPic;
-    
-    RLSAPic = Init(file,RLSAPic);
-
-    RLSAPic = end(RLSAPic);
-
-    restructPic(RLSAPic,"result/1.bmp");
-
-    save_(RLSAPic);
-
-   
+    //myPic = getTextZones(myPic);
+    myPic = applyFilter(myPic);
+    myPic = ApplyRLSA(myPic,180,500);
+    myPic = applyFilter(myPic);
+    restructPic(myPic,"result/res.bmp");
     fclose(file);
-
-
-    // RLSAPic = applyFilter(RLSAPic);
-
-    // RLSAPic = ApplyRLSA(RLSAPic);
-
-    // RLSAPic = Get_Space_Paragraph(RLSAPic);
-
-    // RLSAPic = Get_horizontal_Paragraph(RLSAPic);
-
-    // restructPic(RLSAPic,"result/result.bmp");
-
-
-    return 0;
+    return myPic;
 }

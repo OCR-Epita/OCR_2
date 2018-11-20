@@ -3,22 +3,11 @@
 #include <err.h>
 #include "Packages/lucas/Binary.h"
 #include "Packages/Thomas/TraitementImage.h"
-
+#include "Packages/Thomas/ImageParser.h"
 int main()
 {
-	FILE *file = fopen("Images/lol.bmp","a+");
-    main_(file);
+	FILE *file = fopen("Images/varrains.bmp","a+");
+	//BMPPic_ Pic;
+    treatPic(file);
 	return 0;
-
-
-
-	// RLSAPic = applyFilter(RLSAPic);
-
-    // RLSAPic = ApplyRLSA(RLSAPic);
-
-    // RLSAPic = Get_Space_Paragraph(RLSAPic);
-
-    // RLSAPic = Get_horizontal_Paragraph(RLSAPic);
-
-    // restructPic(RLSAPic,"result/result.bmp");
 }
