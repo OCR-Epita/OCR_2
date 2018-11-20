@@ -8,8 +8,7 @@
 
 
 
-
-
 BMPPic_ Get_Space_Paragraph (BMPPic_ MyPic);
-BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic);
+BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic,int debut, int fin);
+BMPPic_ moulinex(BMPPic_ MyPic);
 #endif //PROJECT2_SEGMENTATION_H

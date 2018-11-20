@@ -6,7 +6,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "../lucas/Binary.h"
 #include "../lucas/Segmentation.h"
+#include "../lucas/Lines.h"
+
+#include "Saver.h"
 #include "TraitementImage.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
@@ -17,8 +22,6 @@ BMPPic_ getHeader(char data[]){
     myPic.header.bfReserved1 = *((short *) (data + 6));
     myPic.header.bfReserved2 = *((short *) (data + 8));
     myPic.header.bfOffBits = *((data + 10));
-    myPic.header.biSize = *((int *) (data + 14));
-    myPic.header.biSize = *((int *) (data + 14));
     myPic.header.biSize = *((int *) (data + 14));
     myPic.header.biWidth = *((int *) (data + 18));
     myPic.header.biHeight = *((int *) (data + 22));
@@ -88,7 +91,7 @@ BMPPic_ setPixel(BMPPic_ myPic,size_t i,size_t j,Pixel_ pixel){
 //Same thing for GetPixel but for greyscale image
 unsigned char getGray(BMPPic_ myPic,size_t x, size_t y){
     unsigned char res = 0;
-    if(x >= 0 && x < myPic.height && y >= 0 && y < myPic.width)
+    if(x < myPic.height && y < myPic.width)
         res = myPic.GREYMATRIX[x][y];
     return res;
 }
@@ -195,8 +198,8 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
         }
     }
 
-    for (int l = 0; l < myPic.height; ++l) {
-        for (int i = 0; i < myPic.width; ++i) {
+    for (size_t l = 0; l < myPic.height; ++l) {
+        for (size_t i = 0; i < myPic.width; ++i) {
             int a = data_x[l][i];
             int b = data_y[l][i];
             int res = 255;
@@ -214,19 +217,36 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic){
 
 
 int main_(FILE *file){
-    BMPPic_ myPic;
     BMPPic_ RLSAPic;
-    //myPic = Init(file,myPic);
+    
     RLSAPic = Init(file,RLSAPic);
-    RLSAPic = end(RLSAPic);
-    restructPic(RLSAPic,"../Lucas.bmp");
-    RLSAPic = applyFilter(RLSAPic);
-    RLSAPic = ApplyRLSA(RLSAPic);
-    RLSAPic = Get_Space_Paragraph(RLSAPic);
-    RLSAPic = Get_horizontal_Paragraph(RLSAPic);
 
-    restructPic(RLSAPic,"../RLSAPic.bmp");
+    //RLSAPic = end(RLSAPic);
+
+
+
+    RLSAPic = applyFilter(RLSAPic);
+
+    RLSAPic = ApplyRLSA(RLSAPic);
+
+    restructPic(RLSAPic,"result/1.bmp");
+
+
+
+
+    RLSAPic = Get_Space_Paragraph(RLSAPic);
+
+    RLSAPic = moulinex(RLSAPic);
+
+    RLSAPic = Get_lines(RLSAPic);
+
+    restructPic(RLSAPic,"result/result.bmp");
+
+    save_(RLSAPic);
 
     fclose(file);
+
+
+
     return 0;
 }

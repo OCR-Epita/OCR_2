@@ -10,6 +10,7 @@
 #include <err.h>
 #include <math.h>
 #include <string.h>
+#include "../lucas/Lines.h"
 
 
 typedef struct {
@@ -39,6 +40,14 @@ typedef struct {
     int yes;
 } Pixel_;
 
+typedef struct {
+    size_t upper_left_x;
+    size_t upper_left_y;
+
+    size_t bottom_right_x;
+    size_t bottom_right_y;
+    int lenght;
+} ligne;
 
 
 typedef struct {
@@ -51,10 +60,14 @@ typedef struct {
     unsigned char **RLSAx;
     unsigned char **RLSAy;
 
-    size_t* colons_scope;
+    int* colons_scope;
+    ligne* all_lines;
     int last;
+
 } BMPPic_;
 
+
+BMPPic_ Get_lines(BMPPic_ MyPic);
 int main_(FILE *file);
 BMPPic_ setPixel(BMPPic_ myPic,size_t i,size_t j,Pixel_ pixel);
 Pixel_ getPixel(BMPPic_ myPic,size_t i,size_t j);

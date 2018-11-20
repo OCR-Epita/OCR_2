@@ -2,7 +2,6 @@
 #include "../Thomas/TraitementImage.h"
 #ifndef PROJECT2_BINARY_H
 #define PROJECT2_BINARY_H
-
 typedef struct {
 
 
@@ -38,8 +37,4 @@ typedef struct {
 } histogram;
 
 BMPPic_ end (BMPPic_ pic);
-
-
-
-
 #endif //PROJECT2_BINARY_H

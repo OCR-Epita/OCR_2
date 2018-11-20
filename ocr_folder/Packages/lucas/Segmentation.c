@@ -5,6 +5,7 @@
 #include "Segmentation.h"
 #include "../Thomas/TraitementImage.h"
 #include <string.h>
+#include <stdlib.h>
 
 
 void Color_colomn (BMPPic_ MyPic,size_t line)
@@ -20,13 +21,15 @@ void Color_colomn (BMPPic_ MyPic,size_t line)
     }
 
 }
+
+
 BMPPic_ Get_Space_Paragraph (BMPPic_ MyPic)
 {
     size_t i = 0;
     size_t j;
     float res;
-    size_t collons[MyPic.width];
-    for (int l = 0; l < MyPic.width; ++l) {
+    int collons[MyPic.width];
+    for (size_t l = 0; l < MyPic.width; ++l) {
         collons[l] = 0;
     }
     int k =0;
@@ -53,49 +56,64 @@ BMPPic_ Get_Space_Paragraph (BMPPic_ MyPic)
         i+=1;
     }
 
-    /*int print = 0;
-    while(print < MyPic.width)
-    {
-        printf("%zu \n",collons[print]);
-        print+=1;
-    }*/
-
     MyPic.last = k-1;
     MyPic.colons_scope = collons;
     return MyPic;
 
 }
 
-void Color_line (BMPPic_ MyPic,size_t line)
+void Color_line (BMPPic_ MyPic,size_t line,int debut,int fin)
 {
-    size_t i = MyPic.colons_scope[0];
-    int last = MyPic.last;
+    int i = debut;
 
-    while(i < MyPic.colons_scope[last])
+    while(i < fin)
     {
-       setGray(MyPic,line,i,80);
-       i+=1;
+        setGray(MyPic, line, i, 80);
+        i+=1;
     }
 
 }
 
-BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic)
+BMPPic_ Get_group (BMPPic_ MyPic,int* list)
+{
+    int i = 1;
+    int* newlist = calloc(0,10);
+    int res =0;
+    int k = 0;
+    while(list[i] != 0)
+    {
+
+
+        if((float)list[i-1]/list[i] > 0.98)
+        {
+            res +=1;
+        }
+        if(res >= 8)
+        {
+
+            newlist[k] = list[i];
+            k+=1;
+            res = 0;
+        }
+        i+=1;
+    }
+    MyPic.colons_scope = newlist;
+    return MyPic;
+}
+
+
+
+BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic,int debut,int fin)
 {
     size_t i = 0;
-    size_t j;
+    int j;
     float res;
-    size_t collons[MyPic.height];
-    for (int l = 0; l < MyPic.height; ++l) {
-        collons[l] = 0;
-    }
-    int k =0;
-
-
+    int k = 0;
     while(i < MyPic.height)
     {
-        j = 200;
+        j = debut;
         res = 0;
-        while(j< MyPic.width)
+        while(j< fin)
         {
             if(getGray(MyPic,i,j) == 0)
             {
@@ -103,15 +121,30 @@ BMPPic_ Get_horizontal_Paragraph (BMPPic_ MyPic)
             }
             j+=1;
         }
-        if(res/MyPic.height < 0.1)
+        if(res/MyPic.width < 0.06)
         {
-            collons[k] = i;
-            Color_line(MyPic,i);
+            Color_line(MyPic,i,debut,fin);
             k+=1;
         }
         i+=1;
     }
 
     return MyPic;
-
 }
+
+BMPPic_ moulinex (BMPPic_ MyPic)
+{
+
+    MyPic = Get_group(MyPic,MyPic.colons_scope);
+    int* list = MyPic.colons_scope;
+    int i = 0;
+    MyPic = Get_horizontal_Paragraph(MyPic,0,list[i]);
+    while( list[i] != 0)
+    {
+        MyPic = Get_horizontal_Paragraph(MyPic,list[i]+1,MyPic.width);
+        i+=1;
+    }
+    return MyPic;
+}
+
+
