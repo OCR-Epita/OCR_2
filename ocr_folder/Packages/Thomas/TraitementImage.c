@@ -9,7 +9,6 @@
 
 #include "../lucas/Binary.h"
 #include "../lucas/Segmentation.h"
-#include "../lucas/Lines.h"
 
 #include "Saver.h"
 #include "TraitementImage.h"
@@ -237,8 +236,6 @@ int main_(FILE *file){
     RLSAPic = Get_Space_Paragraph(RLSAPic);
 
     RLSAPic = moulinex(RLSAPic);
-
-    RLSAPic = Get_lines(RLSAPic);
 
     restructPic(RLSAPic,"result/result.bmp");
 

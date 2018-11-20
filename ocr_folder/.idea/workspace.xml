@@ -11,6 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="aa8bd949-a6c4-4bc6-9e43-dbf002e0ed2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/Thomas/TraitementImage.c" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/Thomas/TraitementImage.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/Thomas/TraitementImage.h" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/Thomas/TraitementImage.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/lucas/Lines.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/lucas/Lines.h" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,18 +36,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="Makefile" value="3" />
-          <entry key="bmp" value="47" />
-          <entry key="c" value="16" />
+          <entry key="Makefile" value="4" />
+          <entry key="bmp" value="48" />
+          <entry key="c" value="17" />
           <entry key="cpp" value="1" />
           <entry key="h" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="47" />
-          <entry key="ObjectiveC" value="32" />
-          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Image" value="48" />
+          <entry key="ObjectiveC" value="33" />
+          <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -62,11 +67,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Packages/lucas/Segmentation.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+            <state relative-caret-position="384">
+              <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -74,8 +79,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Packages/Thomas/TraitementImage.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2436">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="624">
+              <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="123" selection-start-line="4" selection-start-column="123" selection-end-line="4" selection-end-column="123" />
             </state>
           </provider>
         </entry>
@@ -86,10 +100,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/result/1.bmp">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Packages/Thomas/TraitementImage.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="549">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
             </state>
           </provider>
         </entry>
@@ -109,13 +128,13 @@
       <list>
         <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/Packages/lucas/Segmentation.h" />
-        <option value="$PROJECT_DIR$/Makefile" />
-        <option value="$PROJECT_DIR$/Packages/Thomas/TraitementImage.c" />
         <option value="$PROJECT_DIR$/Packages/lucas/Binary.h" />
         <option value="$PROJECT_DIR$/Packages/lucas/Lines.h" />
-        <option value="$PROJECT_DIR$/Packages/Thomas/TraitementImage.h" />
         <option value="$PROJECT_DIR$/Packages/lucas/Segmentation.c" />
         <option value="$PROJECT_DIR$/Packages/lucas/Lines.c" />
+        <option value="$PROJECT_DIR$/Packages/Thomas/TraitementImage.h" />
+        <option value="$PROJECT_DIR$/Packages/Thomas/TraitementImage.c" />
+        <option value="$PROJECT_DIR$/Makefile" />
       </list>
     </option>
   </component>
@@ -155,6 +174,11 @@
               <item name="ocr_folder" type="462c0819:PsiDirectoryNode" />
               <item name="Packages" type="462c0819:PsiDirectoryNode" />
               <item name="lucas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ocr_folder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ocr_folder" type="462c0819:PsiDirectoryNode" />
+              <item name="result" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -197,10 +221,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34496000" />
+    <option name="totallyTimeSpent" value="35235000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="7" />
+    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25506938" />
@@ -294,27 +318,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="146" selection-start-line="4" selection-start-column="146" selection-end-line="4" selection-end-column="146" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/1.bmp">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Packages/lucas/Binary.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Packages/Thomas/TraitementImage.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>
@@ -334,27 +341,44 @@
     <entry file="file://$PROJECT_DIR$/Packages/Thomas/Saver.c">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Packages/lucas/Lines.c">
+    <entry file="file://$PROJECT_DIR$/Packages/lucas/Segmentation.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        <state relative-caret-position="384">
+          <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Packages/lucas/Lines.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Packages/Thomas/TraitementImage.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/result/1.bmp">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/result/result.bmp">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Packages/Thomas/TraitementImage.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2436">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="624">
+          <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Packages/lucas/Segmentation.c">
+    <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+        <state relative-caret-position="60">
+          <caret line="4" column="123" selection-start-line="4" selection-start-column="123" selection-end-line="4" selection-end-column="123" />
         </state>
       </provider>
     </entry>

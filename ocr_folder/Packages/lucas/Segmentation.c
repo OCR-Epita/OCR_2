@@ -136,14 +136,14 @@ BMPPic_ moulinex (BMPPic_ MyPic)
 {
 
     MyPic = Get_group(MyPic,MyPic.colons_scope);
-    int* list = MyPic.colons_scope;
-    int i = 0;
+    /*int* list = MyPic.colons_scope;
+     int i = 0;
     MyPic = Get_horizontal_Paragraph(MyPic,0,list[i]);
     while( list[i] != 0)
     {
         MyPic = Get_horizontal_Paragraph(MyPic,list[i]+1,MyPic.width);
         i+=1;
-    }
+    }*/
     return MyPic;
 }
 
