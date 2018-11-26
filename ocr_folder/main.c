@@ -6,8 +6,7 @@
 #include "Packages/Thomas/ImageParser.h"
 int main()
 {
-	FILE *file = fopen("Images/varrains.bmp","a+");
-	//BMPPic_ Pic;
+	FILE *file = fopen("Images/wiki.bmp","a+");
     treatPic(file);
 	return 0;
 }

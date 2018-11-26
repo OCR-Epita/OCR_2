@@ -222,13 +222,14 @@ void FreePic(BMPPic_ myPic){
 BMPPic_ treatPic(FILE *file){
     BMPPic_ myPic;
     myPic = Init(file,myPic);
-    //myPic = end(myPic);
-
-    //myPic = getTextZones(myPic);
-    myPic = applyFilter(myPic);
+    myPic = end(myPic);
+    
+    //myPic = applyFilter(myPic);
     myPic = ApplyRLSA(myPic,180,500);
-    myPic = applyFilter(myPic);
+    //myPic = applyFilter(myPic);
+    //myPic = getTextZones(myPic);
     restructPic(myPic,"result/res.bmp");
+    FreePic(myPic);
     fclose(file);
     return myPic;
 }

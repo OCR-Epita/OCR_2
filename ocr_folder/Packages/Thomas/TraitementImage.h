@@ -46,9 +46,7 @@ typedef struct {
     unsigned char *HEADERDATA;
     unsigned char *PIXELDATA;
     unsigned char **GREYMATRIX;
-    
     unsigned char **TEXTZONE;
-
     size_t* colons_scope;
     int last;
 } BMPPic_;

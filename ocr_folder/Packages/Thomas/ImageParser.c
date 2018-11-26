@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "TraitementImage.h"
-
+#include "ImageParser.h"
 
 
 BMPPic_ getTextZones(BMPPic_ myPic){
@@ -10,13 +9,9 @@ BMPPic_ getTextZones(BMPPic_ myPic){
 	{
 		for (size_t j = 0; j < myPic.width; ++j)
 		{
-			if (myPic.GREYMATRIX[i][j] == 0)
-			{
-				myPic.GREYMATRIX[i][j] = 124;
-			}
+			printf("%zu %zu\n",i,j);
 		}
 	}
-	
 
 	return myPic;
 }
