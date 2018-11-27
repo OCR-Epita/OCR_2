@@ -220,15 +220,17 @@ void FreePic(BMPPic_ myPic){
 }
 
 BMPPic_ treatPic(FILE *file){
+
     BMPPic_ myPic;
+    BMPPic_ rlsapic;
     myPic = Init(file,myPic);
     myPic = end(myPic);
-    
+    rlsapic = myPic;
     //myPic = applyFilter(myPic);
-    myPic = ApplyRLSA(myPic,180,500);
+    myPic = ApplyRLSA(myPic,300,400);
     //myPic = applyFilter(myPic);
-    //myPic = getTextZones(myPic);
-    restructPic(myPic,"result/res.bmp");
+    myPic = getTextZones(myPic,rlsapic);
+    restructPic(rlsapic,"result/res.bmp");
     FreePic(myPic);
     fclose(file);
     return myPic;
