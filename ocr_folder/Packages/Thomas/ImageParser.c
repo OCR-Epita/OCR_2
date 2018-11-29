@@ -28,11 +28,10 @@ unsigned char ** InitMatrix(size_t height, size_t width, unsigned char value){
 }
 
 BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
+	FILE* toResetData = fopen("DATA","w+");
+	fclose(toResetData);
+	FILE* file = fopen("DATA","a+");
 
-	unsigned char ***ZONES;
-	ZONES = malloc(1);
-	size_t size_of_ZONES = 0;
-	size_t index_of_ZONES = 0;
 	unsigned char ** alreadyTreat = InitMatrix(myPic.height,myPic.width,0);
 
 	for (size_t i = 0; i < myPic.height; ++i)
@@ -69,23 +68,18 @@ BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
 					}
 					++ tp_i;
 				}
-				size_of_ZONES += TABLength;
-				ZONES = realloc(ZONES,size_of_ZONES * sizeof(unsigned char));
-				ZONES[index_of_ZONES] = TAB;
-				SaveMatrixToFile(ZONES[index_of_ZONES],height,width);
-				index_of_ZONES += 1;
+
+				SaveMatrixToFile(TAB,height,width);
+				fwrite(TAB,height * width,1,file);
 			}
 		}
 	}
-	//SaveMatrixToFile(myPic.GREYMATRIX,myPic.height,myPic.width);
 
 	for (size_t i = 0; i < myPic.height; ++i)
 	{
 		free(alreadyTreat[i]);
 	}
 	free(alreadyTreat);
-
-	printf("Zones de txt = %d\n", index_of_ZONES);
 
 	return myPic;
 }

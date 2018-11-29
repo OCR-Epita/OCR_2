@@ -7,6 +7,6 @@
 int main()
 {
 	FILE *file = fopen("Images/wiki.bmp","a+");
-    treatPic(file);
+	treatPic(file);
 	return 0;
 }

@@ -44,7 +44,6 @@ BMPPic_ Init(FILE *file, BMPPic_ myPic){
     myPic.PIXELDATA = calloc((size_t) myPic.header.bfSize - myPic.header.bfOffBits, sizeof(char));
     fread(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,file);
     myPic = InitGreyMatr(myPic);
-
     return myPic;
 }
 
@@ -112,7 +111,6 @@ void restructPic(BMPPic_ myPic, char name[]){
     fwrite(myPic.HEADERDATA,(size_t) myPic.header.bfOffBits,1,ok);
     fwrite(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,ok);
     fclose(ok);
-
 }
 
 //Get the edges of shapes used to binarize an image with text
@@ -142,7 +140,6 @@ BMPPic_ applyFilter(BMPPic_ myPic){
         free(DATA[k]);
     }
     free(DATA);
-
     return myPic;
 }
 
@@ -152,7 +149,6 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
     double seuil = seuil_a;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
-
     for (size_t i = 0; i < myPic.height; ++i) {
         memset(data_x[i],255, sizeof(data_x[i]));
         memset(data_y[i],255, sizeof(data_y[i]));
@@ -172,11 +168,7 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
             }
         }
     }
-
     seuil = seuil_b;
-
-
-
     for (size_t j = 0; j < myPic.width ; ++j) {
         int compt = 0;
         for (size_t i = 0; i < myPic.height; ++i) {
@@ -194,7 +186,6 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
             }
         }
     }
-
     for (size_t l = 0; l < myPic.height; ++l) {
         for (size_t i = 0; i < myPic.width; ++i) {
             int a = data_x[l][i];
