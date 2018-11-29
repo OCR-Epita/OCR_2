@@ -28,15 +28,14 @@ unsigned char ** InitMatrix(unsigned char** matrix,size_t height,size_t width,un
 
 BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
 	unsigned char **alreadyTreat;
-	alreadyTreat = InitMatrix(**alreadyTreat,myPic.height,myPic.width,0);
-	printf("%d \n", alreadyTreat[0][0]);
+	alreadyTreat = InitMatrix(alreadyTreat,myPic.height,myPic.width,0);
 	for (size_t i = 0; i < myPic.height; ++i)
 	{
 		for (size_t j = 0; j < myPic.width; ++j)
 		{
 			if(RLSAPic.GREYMATRIX[i][j] == 0 && alreadyTreat[i][j] == 0)
 			{
-				alreadyTreat[i][j] = 1;
+				alreadyTreat[i][j] = 255;
 			}
 		}
 	}
@@ -46,6 +45,10 @@ BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
 		free(alreadyTreat[i]);
 	}
 	free(alreadyTreat);
+
+	BMPPic_ newPic_;
+	newPic_.header = myPic.header;
+
 
 	return myPic;
 }
