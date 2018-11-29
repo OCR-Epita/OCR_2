@@ -16,6 +16,8 @@ typedef struct
 	POINT_ d;
 } TEXTZONE_;
 
+void SaveMatrixToFile(unsigned char ** ARRAY, size_t height,size_t width);
+
 unsigned char ** InitMatrix(size_t height, size_t width, unsigned char value);
 
 BMPPic_ getTextZones(BMPPic_ myPic,BMPPic_ RLSAPic);

@@ -10,7 +10,7 @@ void SaveMatrixToFile(unsigned char ** ARRAY, size_t height,size_t width){
 			MATRIX[i*width + j] = ARRAY[i][j];
 		}
 	}
-	FILE* file = fopen("DATABASE","w+");
+	FILE* file = fopen("Matrix","w+");
 	fwrite(MATRIX,1,height*width,file);
 	fclose(file);
 	free(MATRIX);
@@ -30,9 +30,9 @@ unsigned char ** InitMatrix(size_t height, size_t width, unsigned char value){
 BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
 
 	unsigned char ***ZONES;
-	ZONES = malloc(1);*
-	size_t size_of_ZONES = 1;
-
+	ZONES = malloc(1);
+	size_t size_of_ZONES = 0;
+	size_t index_of_ZONES = 0;
 	unsigned char ** alreadyTreat = InitMatrix(myPic.height,myPic.width,0);
 
 	for (size_t i = 0; i < myPic.height; ++i)
@@ -69,16 +69,23 @@ BMPPic_ getTextZones(BMPPic_ myPic, BMPPic_ RLSAPic){
 					}
 					++ tp_i;
 				}
-				SaveMatrixToFile(TAB,height,width);
+				size_of_ZONES += TABLength;
+				ZONES = realloc(ZONES,size_of_ZONES * sizeof(unsigned char));
+				ZONES[index_of_ZONES] = TAB;
+				SaveMatrixToFile(ZONES[index_of_ZONES],height,width);
+				index_of_ZONES += 1;
 			}
 		}
 	}
 	//SaveMatrixToFile(myPic.GREYMATRIX,myPic.height,myPic.width);
+
 	for (size_t i = 0; i < myPic.height; ++i)
 	{
 		free(alreadyTreat[i]);
 	}
 	free(alreadyTreat);
+
+	printf("Zones de txt = %d\n", index_of_ZONES);
 
 	return myPic;
 }

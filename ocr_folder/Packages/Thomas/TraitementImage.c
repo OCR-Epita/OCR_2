@@ -44,7 +44,7 @@ BMPPic_ Init(FILE *file, BMPPic_ myPic){
     myPic.PIXELDATA = calloc((size_t) myPic.header.bfSize - myPic.header.bfOffBits, sizeof(char));
     fread(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,file);
     myPic = InitGreyMatr(myPic);
-    
+
     return myPic;
 }
 
@@ -97,7 +97,7 @@ BMPPic_ setGray(BMPPic_ myPic,size_t x, size_t y,unsigned char val){
 
 //Recontrsuct the image, helpfull to check the accuracy of our fonctions
 void restructPic(BMPPic_ myPic, char name[]){
-    
+
     for (size_t i = 0; i < myPic.height; ++i) {
         for (size_t j = 0; j < myPic.width; ++j) {
             Pixel_ cur;
@@ -112,12 +112,12 @@ void restructPic(BMPPic_ myPic, char name[]){
     fwrite(myPic.HEADERDATA,(size_t) myPic.header.bfOffBits,1,ok);
     fwrite(myPic.PIXELDATA,(size_t) myPic.header.bfSize - myPic.header.bfOffBits,1,ok);
     fclose(ok);
-    
+
 }
 
 //Get the edges of shapes used to binarize an image with text
 BMPPic_ applyFilter(BMPPic_ myPic){
-    
+
     long **DATA = calloc(myPic.height*myPic.width, sizeof(long));
     long max = 0;
     long min = 999999;
@@ -142,13 +142,13 @@ BMPPic_ applyFilter(BMPPic_ myPic){
         free(DATA[k]);
     }
     free(DATA);
-    
+
     return myPic;
 }
 
 //Detect text on an image
 BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
-    
+
     double seuil = seuil_a;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
@@ -205,9 +205,9 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
 
             myPic = setGray(myPic, (size_t) l, (size_t) i, (unsigned char) res);
         }
-    }    
+    }
     return myPic;
-} 
+}
 
 void FreePic(BMPPic_ myPic){
     free(myPic.HEADERDATA);
