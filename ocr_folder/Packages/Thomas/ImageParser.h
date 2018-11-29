@@ -16,9 +16,7 @@ typedef struct
 	POINT_ d;
 } TEXTZONE_;
 
-unsigned char ** InitMatrix(unsigned char** matrix,size_t height,size_t width,unsigned char value);
-
-size_t Line(unsigned char* line,size_t i,size_t j,BMPPic_ RLSAPic,BMPPic_ myPic);
+unsigned char ** InitMatrix(size_t height, size_t width, unsigned char value);
 
 BMPPic_ getTextZones(BMPPic_ myPic,BMPPic_ RLSAPic);
 
