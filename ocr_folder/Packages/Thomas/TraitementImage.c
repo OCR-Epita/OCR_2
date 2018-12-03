@@ -6,6 +6,7 @@
 #include "../lucas/Segmentation.h"
 #include "TraitementImage.h"
 #include "ImageParser.h"
+#include "FreeMyPic.h"
 
 //Get the header of the bmp image thanks to it's hexadecimal representation
 BMPPic_ getHeader(char data[]){
@@ -58,6 +59,7 @@ BMPPic_ InitGreyMatr(BMPPic_ myPic){
             myPic.GREYMATRIX[i][j]=a;
         }
     }
+
     return myPic;
 }
 
@@ -113,6 +115,8 @@ void restructPic(BMPPic_ myPic, char name[]){
     fclose(ok);
 }
 
+
+
 //Get the edges of shapes used to binarize an image with text
 BMPPic_ applyFilter(BMPPic_ myPic){
 
@@ -145,7 +149,6 @@ BMPPic_ applyFilter(BMPPic_ myPic){
 
 //Detect text on an image
 BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
-
     double seuil = seuil_a;
     char data_x[myPic.height][myPic.width];
     char data_y[myPic.height][myPic.width];
@@ -200,16 +203,6 @@ BMPPic_ ApplyRLSA(BMPPic_ myPic,int seuil_a,int seuil_b){
     return myPic;
 }
 
-void FreePic(BMPPic_ myPic){
-    free(myPic.HEADERDATA);
-    free(myPic.PIXELDATA);
-    for (size_t i = 0; i < myPic.height; ++i)
-    {
-        free(myPic.GREYMATRIX[i]);
-    }
-    free(myPic.GREYMATRIX);
-}
-
 BMPPic_ treatPic(FILE *file){
 
     BMPPic_ myPic;
@@ -217,12 +210,16 @@ BMPPic_ treatPic(FILE *file){
     myPic = Init(file,myPic);
     myPic = end(myPic);
     rlsapic = myPic;
+
     //myPic = applyFilter(myPic);
-    myPic = ApplyRLSA(myPic,300,400);
+    rlsapic = ApplyRLSA(rlsapic,300,400);
     //myPic = applyFilter(myPic);
+
+
     myPic = getTextZones(myPic,rlsapic);
     restructPic(rlsapic,"result/res.bmp");
-    FreePic(myPic);
+    //FreeAll(myPic);
+    //FreeAll(rlsapic);
     fclose(file);
     return myPic;
 }
